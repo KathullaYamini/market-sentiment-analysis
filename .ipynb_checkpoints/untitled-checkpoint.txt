@@ -1,0 +1,82 @@
+# Create a formatted TXT file with numbered sections and highlighted headings
+import pypandoc
+
+text = """
+# MARKET SENTIMENT VS TRADER BEHAVIOR ANALYSIS
+
+## 1. METHODOLOGY
+
+This analysis explores the relationship between cryptocurrency market sentiment and trader performance using two datasets:
+
+• **Fear & Greed Index dataset**  
+• **Historical trading dataset** containing trade-level records such as account ID, position size, trade direction, and closed profit/loss (PnL).
+
+The datasets were cleaned by:
+1. Converting timestamps into a standard datetime format.
+2. Extracting trading dates from timestamps.
+3. Merging trading data with sentiment data using the **date** field.
+
+This allowed each trade to be associated with the **market sentiment of that day**.
+
+The following metrics were analyzed:
+
+1. **Average PnL by sentiment category**
+2. **Win rate across sentiment conditions**
+3. **Trade frequency per sentiment**
+4. **Average position size**
+5. **Long vs short position ratios**
+6. **Trader segmentation**
+   - Frequent vs Infrequent traders
+   - Consistent winners vs Inconsistent traders
+
+Visualizations such as **boxplots, bar charts, and line plots** were used to identify patterns in trader performance and behavior.
+
+---
+
+## 2. KEY INSIGHTS
+
+### 2.1 Profitability varies across market sentiment
+**Extreme Greed** conditions produce the **highest average profits**, while **Extreme Fear** periods show **larger average losses**.  
+This indicates higher risk during panic-driven markets.
+
+### 2.2 Traders become more active during Fear periods
+Trade frequency is **highest during Fear conditions**, suggesting traders attempt to capitalize on increased volatility and potential market rebounds.
+
+### 2.3 Trading direction changes with sentiment
+Traders tend to:
+
+• Open **more long positions during Fear and Neutral markets**  
+• Open **more short positions during Greed and Extreme Greed markets**
+
+This shows traders adjust strategies based on **market psychology**.
+
+### 2.4 Trading activity level impacts profitability
+**Infrequent traders show higher average PnL than frequent traders**, suggesting that excessive trading may reduce profitability due to overtrading or transaction costs.
+
+---
+
+## 3. STRATEGY RECOMMENDATIONS
+
+### 3.1 Strategy 1 — Reduce Risk During Extreme Fear
+Because **Extreme Fear periods produce the largest losses**, traders should:
+
+1. Reduce position size
+2. Avoid aggressive leverage
+3. Focus on high-confidence trades
+
+This helps reduce downside risk during panic-driven markets.
+
+### 3.2 Strategy 2 — Momentum Trading During Greed
+During **Greed and Extreme Greed conditions**, traders may benefit from momentum strategies:
+
+1. Slightly increase trade frequency
+2. Follow strong market trends
+3. Look for short opportunities when markets appear overextended
+
+These rules help traders capitalize on **trend continuation during optimistic markets**.
+"""
+
+output_path = "/mnt/data/market_sentiment_summary.txt"
+pypandoc.convert_text(text, "plain", format="md", outputfile=output_path, extra_args=['--standalone'])
+
+output_path
